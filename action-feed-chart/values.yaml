@@ -1,0 +1,16 @@
+replicaCount: 1
+vaultToken: token-not-set
+
+services:
+  authService:
+    buildId: 1
+  feedContentService:
+    buildId: 1
+  feedImagesService:
+    buildId: 1
+  feedProgressService:
+    buildId: 1
+  feedSearchService:
+    buildId: 1
+  uiService:
+    buildId: 1

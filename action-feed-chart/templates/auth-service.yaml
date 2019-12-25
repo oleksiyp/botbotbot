@@ -1,0 +1,96 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: auth-service
+  labels:
+    app: action-feed
+    service: auth-service
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api/auth
+            backend:
+              serviceName: auth-service
+              servicePort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+spec:
+  selector:
+    app: action-feed
+    service: auth-service
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  labels:
+    app: action-feed
+    service: auth-service
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: action-feed
+      service: auth-service
+  template:
+    metadata:
+      labels:
+        app: action-feed
+        service: auth-service
+    spec:
+      volumes:
+        - name: bootstrap
+          secret:
+            secretName: bootstrap-yaml
+      containers:
+        - name: auth-service
+          image: "auth-service:{{ .Values.services.authService.buildId }}"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: config
+              name: bootstrap
+          readinessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /actuator/health
+              port: http
+          livenessProbe:
+            initialDelaySeconds: 100
+            httpGet:
+              path: /actuator/health
+              port: http
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: auth-service
+  labels:
+    app: action-feed
+    service: auth-service
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  application-k8s.yaml: |-
+    af:
+      auth:
+        jwt-secret: ${AUTH_JWT_PASSWORD}
+      data:
+        r2dbc:
+          host: action-feed-postgresql
+          password: secret
