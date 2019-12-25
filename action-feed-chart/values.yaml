@@ -1,7 +1,6 @@
 replicaCount: 1
 vaultToken: token-not-set
 
-
 services:
   authService:
     buildId: 2
