@@ -4,7 +4,7 @@ vaultToken: token-not-set
 
 services:
   authService:
-    buildId: 1
+    buildId: 1adfsadf
   feedContentService:
     buildId: 1
   feedImagesService:
