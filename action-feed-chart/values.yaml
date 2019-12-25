@@ -16,3 +16,4 @@ services:
   uiService:
     buildId: 1
 values
+values
