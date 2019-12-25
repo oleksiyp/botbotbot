@@ -153,3 +153,5 @@ resources:
   requests:
     memory: 512Mi
     cpu: 300m
+
+x: y
