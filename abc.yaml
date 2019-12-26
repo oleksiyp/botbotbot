@@ -1,5 +1,6 @@
----
+abc:def
 
+---
 apiVersion: v1
 kind: Pod
 metadata:
