@@ -1,5 +1,4 @@
 dd:dd
-asdfasdf: afsdf
 ---
 apiVersion: v1
 kind: Pod
