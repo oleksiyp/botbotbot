@@ -1,5 +1,6 @@
 fg:ff
 dd:ff
+kk: ff
 ---
 apiVersion: v1
 kind: Pod
