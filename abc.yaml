@@ -1,6 +1,7 @@
 abc:def
 fff: xxx
 dd:ff
+fg:ff
 ---
 apiVersion: v1
 kind: Pod
