@@ -1,6 +1,4 @@
 fg:ff
-dd:fff
-ff: gg
 ---
 apiVersion: v1
 kind: Pod
