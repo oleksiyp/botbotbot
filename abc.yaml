@@ -1,5 +1,4 @@
 dd:dd
-ff:ff
 ---
 apiVersion: v1
 kind: Pod
@@ -21,7 +20,7 @@ spec:
         - "1"
   containers:
     - name: podinfod
-      image: hooli.com/podinfo:2.1.0
+      image: hool.com/podinfo:2.1.0
       imagePullPolicy: IfNotPresent
       ports:
         - containerPort: 9898
