@@ -1,1 +1,4 @@
-abc:
+broken yaml file
+ERROR:
+ A BOM must not appear
+ inside a document.
